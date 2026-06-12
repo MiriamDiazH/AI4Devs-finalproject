@@ -1,6 +1,6 @@
 export type Patient = {
   id: string;
   name: string;
-  birthDate: string;
+  birth_date: string;
   sex: string;
 };

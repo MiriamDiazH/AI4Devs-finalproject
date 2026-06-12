@@ -1,5 +1,2 @@
-class TimelineService:
-    """Placeholder timeline service."""
-
-    def get_patient_timeline(self, patient_id: str) -> list[dict]:
-        return []
+# Timeline logic lives directly in api/timeline.py for the MVP scope.
+# This service is reserved for future aggregation logic.

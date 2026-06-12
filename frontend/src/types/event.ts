@@ -1,9 +1,11 @@
 export type ClinicalEvent = {
   id: string;
-  encounterId: string;
+  encounter_id: string;
+  patient_id: string;
   category: string;
   title: string;
   description: string;
   confidence: number;
-  sourceQuote: string;
+  source_quote: string;
+  event_date: string | null;
 };

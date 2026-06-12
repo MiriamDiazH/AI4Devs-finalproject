@@ -1,1 +1,2 @@
-# Clinical event endpoints will be implemented in Delivery 2.
+# Events are created via POST /encounters/{id}/extract-events.
+# This module is reserved for future per-event endpoints.

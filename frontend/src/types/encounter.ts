@@ -1,7 +1,7 @@
 export type Encounter = {
   id: string;
-  patientId: string;
+  patient_id: string;
   date: string;
   type: string;
-  noteText: string;
+  note_text: string;
 };
