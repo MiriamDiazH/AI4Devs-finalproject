@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: auditcare-postgres
+    environment:
+      POSTGRES_USER: auditcare
+      POSTGRES_PASSWORD: auditcare
+      POSTGRES_DB: auditcare
+    ports:
+      - "5433:5432"
+    volumes:
+      - auditcare_postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: auditcare-backend
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://auditcare:auditcare@postgres:5432/auditcare
+      STATEWAVE_URL: http://host.docker.internal:8100
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: auditcare-frontend
+    depends_on:
+      - backend
+    environment:
+      PORT: 3000
+    ports:
+      - "3000:3000"
+
+volumes:
+  auditcare_postgres_data:
